@@ -1,0 +1,5 @@
+*.bag
+test/*
+*.swp
+*.swn
+*.swo
