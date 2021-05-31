@@ -8,9 +8,11 @@ from queue import Queue
 
 class BagRealsenseSaver(object):
 
-    def __init__(self, top_dir_saving, using_compressed_topic=False):
+    def __init__(self, top_dir_saving, using_compressed_topic=False, saving_hours=None):
         
         self.using_compressed_topic = using_compressed_topic
+
+        self.saving_hours = saving_hours # list choosed hours for saving bag file
 
         if not os.path.exists(top_dir_saving):
             os.makedirs(top_dir_saving)
@@ -106,6 +108,10 @@ class BagRealsenseSaver(object):
         #self.sema_info.acquire()
         
         name_file = self.get_folder_hourly_log()
+
+        if (self.saving_hours is not None) and (int(name_file) not in self.saving_hours):
+            return
+
         pre_file = self.get_folder_daily_log()
         path_bag_file = "{}/{}_{}.bag".format(self.top_dir_saving, pre_file, name_file)
 

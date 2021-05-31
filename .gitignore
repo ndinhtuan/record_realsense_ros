@@ -3,3 +3,4 @@ test/*
 *.swp
 *.swn
 *.swo
+origin_bag/*
